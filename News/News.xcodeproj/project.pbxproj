@@ -14,6 +14,7 @@
 		580E98A52CAD9564004D6FE2 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 580E98A42CAD9564004D6FE2 /* Base */; };
 		580E98AD2CAE60F0004D6FE2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E98AC2CAE60F0004D6FE2 /* MainViewController.swift */; };
 		580E98B02CAE655A004D6FE2 /* UIView+AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E98AF2CAE655A004D6FE2 /* UIView+AutoLayout.swift */; };
+		580E98B72CAE74C8004D6FE2 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E98B62CAE74C8004D6FE2 /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		580E98A62CAD9564004D6FE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		580E98AC2CAE60F0004D6FE2 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		580E98AF2CAE655A004D6FE2 /* UIView+AutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AutoLayout.swift"; sourceTree = "<group>"; };
+		580E98B62CAE74C8004D6FE2 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				580E98B12CAE6562004D6FE2 /* Extensions */,
+				580E98B62CAE74C8004D6FE2 /* CoreDataManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -188,6 +191,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				580E98B72CAE74C8004D6FE2 /* CoreDataManager.swift in Sources */,
 				580E98B02CAE655A004D6FE2 /* UIView+AutoLayout.swift in Sources */,
 				580E98962CAD9563004D6FE2 /* AppDelegate.swift in Sources */,
 				580E98A02CAD9563004D6FE2 /* News.xcdatamodeld in Sources */,
