@@ -13,6 +13,7 @@
 		580E98A22CAD9564004D6FE2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 580E98A12CAD9564004D6FE2 /* Assets.xcassets */; };
 		580E98A52CAD9564004D6FE2 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 580E98A42CAD9564004D6FE2 /* Base */; };
 		580E98AD2CAE60F0004D6FE2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E98AC2CAE60F0004D6FE2 /* MainViewController.swift */; };
+		580E98B02CAE655A004D6FE2 /* UIView+AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E98AF2CAE655A004D6FE2 /* UIView+AutoLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		580E98A42CAD9564004D6FE2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		580E98A62CAD9564004D6FE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		580E98AC2CAE60F0004D6FE2 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		580E98AF2CAE655A004D6FE2 /* UIView+AutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AutoLayout.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 		580E98942CAD9563004D6FE2 /* News */ = {
 			isa = PBXGroup;
 			children = (
+				580E98AE2CAE654D004D6FE2 /* Utils */,
 				580E98952CAD9563004D6FE2 /* AppDelegate.swift */,
 				580E98972CAD9563004D6FE2 /* SceneDelegate.swift */,
 				580E98AC2CAE60F0004D6FE2 /* MainViewController.swift */,
@@ -65,6 +68,22 @@
 				580E989E2CAD9563004D6FE2 /* News.xcdatamodeld */,
 			);
 			path = News;
+			sourceTree = "<group>";
+		};
+		580E98AE2CAE654D004D6FE2 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				580E98B12CAE6562004D6FE2 /* Extensions */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		580E98B12CAE6562004D6FE2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				580E98AF2CAE655A004D6FE2 /* UIView+AutoLayout.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,6 +156,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				580E98B02CAE655A004D6FE2 /* UIView+AutoLayout.swift in Sources */,
 				580E98962CAD9563004D6FE2 /* AppDelegate.swift in Sources */,
 				580E98A02CAD9563004D6FE2 /* News.xcdatamodeld in Sources */,
 				580E98982CAD9563004D6FE2 /* SceneDelegate.swift in Sources */,
