@@ -100,10 +100,9 @@
 		580E98AE2CAE654D004D6FE2 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				580E98CC2CAEEAFE004D6FE2 /* FileManager */,
+				580E98D72CAFC862004D6FE2 /* CoreData */,
 				580E98BB2CAE96EF004D6FE2 /* Network */,
 				580E98B12CAE6562004D6FE2 /* Extensions */,
-				580E98B62CAE74C8004D6FE2 /* CoreDataManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -111,6 +110,7 @@
 		580E98B12CAE6562004D6FE2 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				580E98CC2CAEEAFE004D6FE2 /* FileManager */,
 				580E98AF2CAE655A004D6FE2 /* UIView+AutoLayout.swift */,
 			);
 			path = Extensions;
@@ -195,12 +195,28 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		580E98D72CAFC862004D6FE2 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				580E98B62CAE74C8004D6FE2 /* CoreDataManager.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		580E98DB2CAFC93A004D6FE2 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
 				580E98DC2CAFC96F004D6FE2 /* ArticleCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		580E98E02CAFCC25004D6FE2 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				580E98E12CAFCC39004D6FE2 /* MainCollectionViewManager.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
