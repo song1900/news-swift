@@ -28,5 +28,15 @@ final class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupNavigation()
+    }
+}
+
+extension MainViewController {
+    private func setupNavigation() {
+        title = "NEWS"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
 }

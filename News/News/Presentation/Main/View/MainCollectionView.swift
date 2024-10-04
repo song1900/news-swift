@@ -20,6 +20,8 @@ final class MainCollectionView: UICollectionView {
 
 extension MainCollectionView {
     private func setupCollectionView() {
+        backgroundColor = .clear
+        
         register(ArticleCell.self, forCellWithReuseIdentifier: ArticleCell.reuseIdentifier)
     }
 }
