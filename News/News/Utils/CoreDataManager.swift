@@ -24,13 +24,12 @@ final class CoreDataManager {
         persistentContainer.viewContext
     }
     
-    private func saveContext() throws {
+    private func saveContext() {
         if context.hasChanges {
             do {
                 try context.save()
             } catch {
                 NSLog("Save Context error: %@", error.localizedDescription)
-                throw error
             }
         }
     }
@@ -42,13 +41,11 @@ extension CoreDataManager {
         configure: (T) -> Void
     ) {
         let entityName = String(describing: objectType)
-        let entity = NSEntityDescription.insertNewObject(forEntityName: entityName, into: context) as! T
-        configure(entity)
-        do {
-            try saveContext()
-        } catch {
-            NSLog("Failed to create for \(entityName): %@", error.localizedDescription)
+        guard let entity = NSEntityDescription.insertNewObject(forEntityName: entityName, into: context) as? T else {
+            return NSLog("Failed to create entity: \(entityName)")
         }
+        configure(entity)
+        saveContext()
     }
     
     func batchInsert<T: NSManagedObject>(
@@ -61,7 +58,7 @@ extension CoreDataManager {
         
         do {
             try context.execute(batchInsert)
-            try saveContext()
+            saveContext()
         } catch {
             NSLog("Failed to batch insert for \(entityName): \(error.localizedDescription)")
         }
@@ -90,7 +87,7 @@ extension CoreDataManager {
             let objects = try context.fetch(fetchRequest)
             if let objectToUpdate = objects.first {
                 configure(objectToUpdate)
-                try saveContext()
+                saveContext()
             }
         } catch {
             NSLog("Failed to update for \(entityName): %@", error.localizedDescription)
@@ -105,7 +102,7 @@ extension CoreDataManager {
         
         do {
             try context.execute(deleteRequest)
-            try saveContext()
+            saveContext()
         } catch {
             NSLog("Failed to delete all for \(entityName): %@", error.localizedDescription)
         }
