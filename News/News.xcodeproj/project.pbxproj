@@ -22,6 +22,8 @@
 		580E98C32CAE97CC004D6FE2 /* URLRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E98C22CAE97CC004D6FE2 /* URLRequestBuilder.swift */; };
 		580E98C52CAE98D5004D6FE2 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E98C42CAE98D5004D6FE2 /* Response.swift */; };
 		580E98C72CAE9E9F004D6FE2 /* NewsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E98C62CAE9E9F004D6FE2 /* NewsResponse.swift */; };
+		580E98CB2CAEEAA4004D6FE2 /* FileManager+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E98CA2CAEEAA4004D6FE2 /* FileManager+.swift */; };
+		580E98CE2CAEEB0D004D6FE2 /* FileManagerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E98CD2CAEEB0D004D6FE2 /* FileManagerError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		580E98C22CAE97CC004D6FE2 /* URLRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestBuilder.swift; sourceTree = "<group>"; };
 		580E98C42CAE98D5004D6FE2 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		580E98C62CAE9E9F004D6FE2 /* NewsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsResponse.swift; sourceTree = "<group>"; };
+		580E98CA2CAEEAA4004D6FE2 /* FileManager+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+.swift"; sourceTree = "<group>"; };
+		580E98CD2CAEEB0D004D6FE2 /* FileManagerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +90,7 @@
 		580E98AE2CAE654D004D6FE2 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				580E98CC2CAEEAFE004D6FE2 /* FileManager */,
 				580E98BB2CAE96EF004D6FE2 /* Network */,
 				580E98B12CAE6562004D6FE2 /* Extensions */,
 				580E98B62CAE74C8004D6FE2 /* CoreDataManager.swift */,
@@ -156,6 +161,15 @@
 				580E98C42CAE98D5004D6FE2 /* Response.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		580E98CC2CAEEAFE004D6FE2 /* FileManager */ = {
+			isa = PBXGroup;
+			children = (
+				580E98CD2CAEEB0D004D6FE2 /* FileManagerError.swift */,
+				580E98CA2CAEEAA4004D6FE2 /* FileManager+.swift */,
+			);
+			path = FileManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,7 +245,9 @@
 				580E98C32CAE97CC004D6FE2 /* URLRequestBuilder.swift in Sources */,
 				580E98BA2CAE892D004D6FE2 /* Article.swift in Sources */,
 				580E98B72CAE74C8004D6FE2 /* CoreDataManager.swift in Sources */,
+				580E98CB2CAEEAA4004D6FE2 /* FileManager+.swift in Sources */,
 				580E98B02CAE655A004D6FE2 /* UIView+AutoLayout.swift in Sources */,
+				580E98CE2CAEEB0D004D6FE2 /* FileManagerError.swift in Sources */,
 				580E98C52CAE98D5004D6FE2 /* Response.swift in Sources */,
 				580E98962CAD9563004D6FE2 /* AppDelegate.swift in Sources */,
 				580E98BD2CAE96F8004D6FE2 /* HTTPMethod.swift in Sources */,
