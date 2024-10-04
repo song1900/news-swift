@@ -29,6 +29,7 @@
 		580E98DA2CAFC8DF004D6FE2 /* MainCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E98D92CAFC8DF004D6FE2 /* MainCollectionView.swift */; };
 		580E98DD2CAFC96F004D6FE2 /* ArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E98DC2CAFC96F004D6FE2 /* ArticleCell.swift */; };
 		580E98DF2CAFCAEC004D6FE2 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E98DE2CAFCAEC004D6FE2 /* MainViewModel.swift */; };
+		580E98E22CAFCC39004D6FE2 /* MainCollectionViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E98E12CAFCC39004D6FE2 /* MainCollectionViewManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		580E98D92CAFC8DF004D6FE2 /* MainCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionView.swift; sourceTree = "<group>"; };
 		580E98DC2CAFC96F004D6FE2 /* ArticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCell.swift; sourceTree = "<group>"; };
 		580E98DE2CAFCAEC004D6FE2 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		580E98E12CAFCC39004D6FE2 /* MainCollectionViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -292,6 +294,7 @@
 				580E98C32CAE97CC004D6FE2 /* URLRequestBuilder.swift in Sources */,
 				580E98BA2CAE892D004D6FE2 /* Article.swift in Sources */,
 				580E98B72CAE74C8004D6FE2 /* CoreDataManager.swift in Sources */,
+				580E98E22CAFCC39004D6FE2 /* MainCollectionViewManager.swift in Sources */,
 				580E98CB2CAEEAA4004D6FE2 /* FileManager+.swift in Sources */,
 				580E98B02CAE655A004D6FE2 /* UIView+AutoLayout.swift in Sources */,
 				580E98CE2CAEEB0D004D6FE2 /* FileManagerError.swift in Sources */,

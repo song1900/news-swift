@@ -10,10 +10,12 @@ import UIKit
 final class MainViewController: UIViewController {
     private var rootView = MainRootView()
     private let viewModel: MainViewModel
+    private var collectionViewManager: MainCollectionViewManager?
 
     init(viewModel: MainViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        collectionViewManager = MainCollectionViewManager(collectionView: rootView.collectionView, viewModel: viewModel)
     }
     
     required init?(coder: NSCoder) {
