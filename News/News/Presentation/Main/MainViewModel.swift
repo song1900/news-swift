@@ -8,4 +8,5 @@
 import Foundation
 
 final class MainViewModel {
+    private(set) var articles: [Article] = []
 }

@@ -17,6 +17,7 @@ final class MainCollectionViewManager: NSObject {
     
     private let collectionView: UICollectionView
     private let viewModel: MainViewModel
+    private lazy var dataSource: DataSource = setDataSource()
     
     init(
         collectionView: UICollectionView,
@@ -25,6 +26,43 @@ final class MainCollectionViewManager: NSObject {
         self.collectionView = collectionView
         self.viewModel = viewModel
         super.init()
+        configureCollectionView()
+    }
+
+    func update() {
+        applySnapShot()
+    }
+    
+}
+
+extension MainCollectionViewManager {
+    private func configureCollectionView() {
+        collectionView.collectionViewLayout = setCompositinalLayout()
+    }
+    
+    private func setDataSource() -> DataSource {
+        let dataSource: DataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, model in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArticleCell.reuseIdentifier, for: indexPath) as? ArticleCell else {
+                return .init()
+            }
+            return cell
+        }
+        return dataSource
+    }
+    
+    private func applySnapShot() {
+        var snapShot = SnapShot()
+        snapShot.appendSections([.main])
+        snapShot.appendItems(viewModel.articles, toSection: .main)
+        dataSource.apply(snapShot)
+    }
+    
+    private func setCompositinalLayout() -> UICollectionViewCompositionalLayout {
+        UICollectionViewCompositionalLayout { _, _ in
+            ArticleCell.layout()
+        }
+    }
+}
     }
 }
 
