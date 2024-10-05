@@ -16,6 +16,8 @@ enum NetworkError: Error {
     case tooManyRequests
     case apiKeyInvalid
     case serverError
+    case missingApiBaseURL
+    case missingApiKey
     case custom(String)
     
     var localizedDescription: String {
@@ -36,6 +38,10 @@ enum NetworkError: Error {
             "API key is invalid."
         case .serverError:
             "Server Error."
+        case .missingApiBaseURL:
+            "API Base URL is missing"
+        case .missingApiKey:
+            "API Key is missing"
         case .custom(let message):
             message
         }
