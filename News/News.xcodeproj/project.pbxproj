@@ -31,6 +31,7 @@
 		580E98DF2CAFCAEC004D6FE2 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E98DE2CAFCAEC004D6FE2 /* MainViewModel.swift */; };
 		580E98E22CAFCC39004D6FE2 /* MainCollectionViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E98E12CAFCC39004D6FE2 /* MainCollectionViewManager.swift */; };
 		58A626512CB1098700B56EDD /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A626502CB1098700B56EDD /* AppConfiguration.swift */; };
+		58A626532CB1249800B56EDD /* UIViewController+Indicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A626522CB1249800B56EDD /* UIViewController+Indicator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		580E98DE2CAFCAEC004D6FE2 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		580E98E12CAFCC39004D6FE2 /* MainCollectionViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewManager.swift; sourceTree = "<group>"; };
 		58A626502CB1098700B56EDD /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
+		58A626522CB1249800B56EDD /* UIViewController+Indicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Indicator.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 			children = (
 				580E98CC2CAEEAFE004D6FE2 /* FileManager */,
 				580E98AF2CAE655A004D6FE2 /* UIView+AutoLayout.swift */,
+				58A626522CB1249800B56EDD /* UIViewController+Indicator.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -308,6 +311,7 @@
 				580E98C72CAE9E9F004D6FE2 /* NewsResponse.swift in Sources */,
 				580E98D62CAFC7F5004D6FE2 /* MainRootView.swift in Sources */,
 				580E98A02CAD9563004D6FE2 /* News.xcdatamodeld in Sources */,
+				58A626532CB1249800B56EDD /* UIViewController+Indicator.swift in Sources */,
 				580E98BF2CAE9715004D6FE2 /* NetworkError.swift in Sources */,
 				580E98C12CAE9797004D6FE2 /* Request.swift in Sources */,
 				58A626512CB1098700B56EDD /* AppConfiguration.swift in Sources */,

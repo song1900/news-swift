@@ -13,7 +13,7 @@ extension MainViewModel {
         case initial, fetchTopHeadlines, fetchTopHeadlinesNextPage
     }
     enum Action {
-        case didFetchTopHeadlines
+        case didFetchTopHeadlines, showLoading(Bool)
     }
 }
 
@@ -25,7 +25,13 @@ final class MainViewModel {
     }
     
     private var currentPage = 1
-    private var isFetching = false
+    private var isFetching = false {
+        didSet {
+            Task { @MainActor in
+                actionSubject.send(.showLoading(isFetching))
+            }
+        }
+    }
     private var articlesTotalCount = 0
     private(set) var articles: [Article] = []
     
@@ -61,10 +67,8 @@ extension MainViewModel {
     private func fetchTopHeadlines() {
         guard !isFetching else { return }
         isFetching = true
-        
         Task {
             defer { isFetching = false }
-            
             guard let apiKey = AppConfiguration.apiKey else {
                 throw NetworkError.missingApiKey
             }
@@ -83,12 +87,12 @@ extension MainViewModel {
                 guard let data: NewsResponse = response.decode() else {
                     throw NetworkError.decodingFailed
                 }
+                
                 currentPage += 1
                 articlesTotalCount = data.totalResults
                 articles += data.articles
                 
                 actionSubject.send(.didFetchTopHeadlines)
-                
             } catch {
                 NSLog("ERROR \(error.localizedDescription)")
             }

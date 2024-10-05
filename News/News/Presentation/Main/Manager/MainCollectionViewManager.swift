@@ -71,7 +71,7 @@ extension MainCollectionViewManager: UICollectionViewDelegate {
         forItemAt indexPath: IndexPath
     ) {
         let totalItems = viewModel.articles.count
-        if indexPath.item == (totalItems - 3) {
+        if indexPath.item == (totalItems - 1) {
             viewModel.state = .fetchTopHeadlinesNextPage
         }
     }

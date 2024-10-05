@@ -35,6 +35,11 @@ final class MainViewController: UIViewController {
         viewModel.state = .fetchTopHeadlines
         bindAction()
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        hideLoadingView()
+    }
 }
 
 extension MainViewController {
@@ -53,6 +58,12 @@ extension MainViewController {
                 switch action {
                 case .didFetchTopHeadlines:
                     self?.collectionViewManager?.update()
+                case .showLoading(let isLoading):
+                    if isLoading {
+                        self?.showLoadingView()
+                    } else {
+                        self?.hideLoadingView()
+                    }
                 }
             }.store(in: &cancellables)
     }
