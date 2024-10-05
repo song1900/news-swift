@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import Combine
 
 final class MainViewController: UIViewController {
     private var rootView = MainRootView()
     private let viewModel: MainViewModel
     private var collectionViewManager: MainCollectionViewManager?
+    private var cancellables: Set<AnyCancellable> = .init()
 
     init(viewModel: MainViewModel) {
         self.viewModel = viewModel
@@ -24,12 +26,14 @@ final class MainViewController: UIViewController {
     
     override func loadView() {
         view = rootView
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupNavigation()
+        viewModel.state = .fetchTopHeadlines
+        bindAction()
     }
 }
 
@@ -38,5 +42,18 @@ extension MainViewController {
         title = "NEWS"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.hidesSearchBarWhenScrolling = false
+    }
+}
+
+extension MainViewController {
+    private func bindAction() {
+        viewModel.actionPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] action in
+                switch action {
+                case .didFetchTopHeadlines:
+                    self?.collectionViewManager?.update()
+                }
+            }.store(in: &cancellables)
     }
 }
