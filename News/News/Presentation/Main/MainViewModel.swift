@@ -97,8 +97,24 @@ extension MainViewModel {
                 actionSubject.send(.didFetchTopHeadlines)
             } catch {
                 handleError(error)
+                // 에러 발생 시 CoreData에서 데이터 가져오기
+                loadArticlesFromCoreData()
             }
         }
+    }
+    
+    private func loadArticlesFromCoreData() {
+        let savedArticles = CoreDataManager.shared.fetch(ArticleEntity.self)
+        guard !savedArticles.isEmpty else {
+            return NSLog("CoreData에도 데이터가 없음.")
+        }
+        articles = savedArticles.map { Article(
+            title: $0.title ?? "",
+            url: $0.url ?? "",
+            urlToImage: $0.urlToImage,
+            publishedAt: $0.publishedAt ?? "")
+        }
+        actionSubject.send(.didFetchTopHeadlines)
     }
     
     private func saveArticlesToCoreData(articles: [Article]) {
@@ -129,6 +145,6 @@ extension MainViewModel {
         default:
             errorLocalizedDescription = error.localizedDescription
         }
-        NSLog("Error in \(#fileID) : $0", errorLocalizedDescription)
+        NSLog("Error in {\(#fileID)} : %@", errorLocalizedDescription)
     }
 }
