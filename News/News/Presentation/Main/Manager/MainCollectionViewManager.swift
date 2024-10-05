@@ -32,12 +32,12 @@ final class MainCollectionViewManager: NSObject {
     func update() {
         applySnapShot()
     }
-    
 }
 
 extension MainCollectionViewManager {
     private func configureCollectionView() {
         collectionView.collectionViewLayout = setCompositinalLayout()
+        collectionView.delegate = self
     }
     
     private func setDataSource() -> DataSource {
@@ -63,6 +63,17 @@ extension MainCollectionViewManager {
         }
     }
 }
+
+extension MainCollectionViewManager: UICollectionViewDelegate {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        willDisplay cell: UICollectionViewCell,
+        forItemAt indexPath: IndexPath
+    ) {
+        let totalItems = viewModel.articles.count
+        if indexPath.item == (totalItems - 3) {
+            viewModel.state = .fetchTopHeadlinesNextPage
+        }
     }
 }
 
