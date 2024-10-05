@@ -94,8 +94,19 @@ extension MainViewModel {
                 
                 actionSubject.send(.didFetchTopHeadlines)
             } catch {
-                NSLog("ERROR \(error.localizedDescription)")
+                handleError(error)
             }
         }
+    }
+    
+    private func handleError(_ error: Error) {
+        let errorLocalizedDescription: String
+        switch error {
+        case let networkError as NetworkError:
+            errorLocalizedDescription = networkError.localizedDescription
+        default:
+            errorLocalizedDescription = error.localizedDescription
+        }
+        NSLog("Error in \(#fileID) : $0", errorLocalizedDescription)
     }
 }
