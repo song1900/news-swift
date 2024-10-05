@@ -30,6 +30,7 @@
 		580E98DD2CAFC96F004D6FE2 /* ArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E98DC2CAFC96F004D6FE2 /* ArticleCell.swift */; };
 		580E98DF2CAFCAEC004D6FE2 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E98DE2CAFCAEC004D6FE2 /* MainViewModel.swift */; };
 		580E98E22CAFCC39004D6FE2 /* MainCollectionViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E98E12CAFCC39004D6FE2 /* MainCollectionViewManager.swift */; };
+		58A626512CB1098700B56EDD /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A626502CB1098700B56EDD /* AppConfiguration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		580E98DC2CAFC96F004D6FE2 /* ArticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCell.swift; sourceTree = "<group>"; };
 		580E98DE2CAFCAEC004D6FE2 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		580E98E12CAFCC39004D6FE2 /* MainCollectionViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewManager.swift; sourceTree = "<group>"; };
+		58A626502CB1098700B56EDD /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 			children = (
 				580E98952CAD9563004D6FE2 /* AppDelegate.swift */,
 				580E98972CAD9563004D6FE2 /* SceneDelegate.swift */,
+				58A626502CB1098700B56EDD /* AppConfiguration.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				580E98A02CAD9563004D6FE2 /* News.xcdatamodeld in Sources */,
 				580E98BF2CAE9715004D6FE2 /* NetworkError.swift in Sources */,
 				580E98C12CAE9797004D6FE2 /* Request.swift in Sources */,
+				58A626512CB1098700B56EDD /* AppConfiguration.swift in Sources */,
 				580E98DF2CAFCAEC004D6FE2 /* MainViewModel.swift in Sources */,
 				580E98982CAD9563004D6FE2 /* SceneDelegate.swift in Sources */,
 				580E98DD2CAFC96F004D6FE2 /* ArticleCell.swift in Sources */,
@@ -332,6 +336,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				API_BASE_URL = "https://newsapi.org/v2";
+				API_KEY = 911f6577c9284839bfaa3c5e75d58b6f;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -395,6 +401,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				API_BASE_URL = "https://newsapi.org/v2";
+				API_KEY = 911f6577c9284839bfaa3c5e75d58b6f;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
