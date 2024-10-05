@@ -92,11 +92,33 @@ extension MainViewModel {
                 articlesTotalCount = data.totalResults
                 articles += data.articles
                 
+                saveArticlesToCoreData(articles: data.articles)
+                
                 actionSubject.send(.didFetchTopHeadlines)
             } catch {
                 handleError(error)
             }
         }
+    }
+    
+    private func saveArticlesToCoreData(articles: [Article]) {
+        let coreDataManager = CoreDataManager.shared
+        let existingArticles = coreDataManager.fetch(ArticleEntity.self)
+        let existingTitles = Set(existingArticles.map { $0.title })
+            
+        let newArticles = articles.filter { !existingTitles.contains($0.title) }
+        
+        guard !newArticles.isEmpty else { return }
+        
+        let articleData = newArticles.map {
+            [
+                "title": $0.title,
+                "url": $0.url,
+                "urlToImage": $0.urlToImage as Any,
+                "publishedAt" : $0.publishedAt
+            ]
+        }
+        coreDataManager.batchInsert(ArticleEntity.self, data: articleData)
     }
     
     private func handleError(_ error: Error) {
