@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIViewController {
-    func showLoadingView() {
+    func showLoadingView(isBlocking: Bool = true) {
         guard let window = UIApplication.shared.connectedScenes
             .compactMap({ ($0 as? UIWindowScene)?.windows.first })
             .first(where: { $0.isKeyWindow })
@@ -17,10 +17,17 @@ extension UIViewController {
             guard window.viewWithTag(999) == nil else { return }
             let spinner = UIActivityIndicatorView(style: .large)
             spinner.center = window.center
-            let backgroundView = UIView(frame: window.bounds)
-            backgroundView.tag = 999
-            backgroundView.addSubview(spinner)
-            window.addSubview(backgroundView)
+            spinner.color = .systemBlue
+            spinner.tag = 999
+            if isBlocking {
+                let backgroundView = UIView(frame: window.bounds)
+                backgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+                backgroundView.tag = 998
+                backgroundView.addSubview(spinner)
+                window.addSubview(backgroundView)
+            } else {
+                window.addSubview(spinner)
+            }
             spinner.startAnimating()
         }
     }
@@ -32,6 +39,7 @@ extension UIViewController {
         else { return }
         Task { @MainActor in
             window.viewWithTag(999)?.removeFromSuperview()
+            window.viewWithTag(998)?.removeFromSuperview()
         }
     }
 }

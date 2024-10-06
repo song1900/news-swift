@@ -9,7 +9,7 @@ import UIKit
 import WebKit
 
 final class DetailRootView: UIView {
-    private var webView: WKWebView = .init()
+    private(set) var webView: WKWebView = .init()
     
     override init(frame: CGRect) {
         super.init(frame: frame)

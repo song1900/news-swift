@@ -10,10 +10,10 @@ import Foundation
 
 extension DetailViewModel {
     enum State {
-        case initial, loadWebView
+        case initial, loadWebView, didFinishLoadWebView, didFailLoadView(Error)
     }
     enum Action {
-        case loadWebView(String), didMarkArticleAsRead(Article)
+        case loadWebView(String), didMarkArticleAsRead(Article), showLoading(Bool)
     }
 }
 
@@ -41,12 +41,26 @@ extension DetailViewModel {
                 case .loadWebView:
                     self?.updateArticleToCoreData()
                     self?.loadWebView()
+                case .didFinishLoadWebView:
+                    self?.handleLoading(false)
+                case .didFailLoadView(let error):
+                    self?.didFailLoadView(error: error)
                 }
             }
             .store(in: &cancellables)
     }
     
+    private func handleLoading(_ val: Bool) {
+        actionSubject.send(.showLoading(val))
+    }
+    
+    private func didFailLoadView(error: Error) {
+        handleLoading(false)
+        NSLog("Failed to load WKWebView: %@", error.localizedDescription)
+    }
+    
     private func loadWebView() {
+        handleLoading(true)
         let url = article.url
         actionSubject.send(.loadWebView(url))
     }

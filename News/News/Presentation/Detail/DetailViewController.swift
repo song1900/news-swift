@@ -16,11 +16,13 @@ final class DetailViewController: UIViewController {
     weak var delegate: DetailViewControllerDelegate?
     private var rootView = DetailRootView()
     private let viewModel: DetailViewModel
+    private var webViewManager: DetailWebViewManager?
     private var cancellables: Set<AnyCancellable> = .init()
     
     init(viewModel: DetailViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        webViewManager = DetailWebViewManager(webView: rootView.webView, viewModel: viewModel)
     }
     
     required init?(coder: NSCoder) {
@@ -60,6 +62,12 @@ extension DetailViewController {
                     self?.rootView.loadWebView(url: url)
                 case .didMarkArticleAsRead(let article):
                     self?.delegate?.didMarkArticleAsRead(article)
+                case .showLoading(let isLoading):
+                    if isLoading {
+                        self?.showLoadingView(isBlocking: false)
+                    } else {
+                        self?.hideLoadingView()
+                    }
                 }
             }.store(in: &cancellables)
     }
