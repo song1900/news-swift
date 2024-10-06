@@ -7,15 +7,11 @@
 
 import UIKit
 
-final class ArticleLandscapeCell: UICollectionViewCell {
+final class ArticleLandscapeCell: DefaultArticleCell {
     static let reuseIdentifier = String(describing: ArticleLandscapeCell.self)
-    private let titleLabel: UILabel = .init()
-    private let imageView: UIImageView = .init()
-    private let publishedAtLabel: UILabel = .init()
-    
+    static private let cellSize = CGSize(width: 300, height: 120)
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupStyle()
         setupLayout()
     }
     
@@ -23,27 +19,22 @@ final class ArticleLandscapeCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        imageView.image = nil
-    }
-    
-    func update(_ model: Article) {
-        titleLabel.text = model.title
-        titleLabel.textColor = model.isRead ? .red : .label
-        publishedAtLabel.text = model.publishedAt
-        updateImageView(model.urlToImage)
+    override func updateImageView(_ urlToImage: String?) {
+        if let urlToImage {
+            imageView.isHidden = false
+            let imageWidth: CGFloat = ArticleLandscapeCell.cellSize.height
+            let widthConstraint = imageView.widthAnchor.constraint(equalToConstant: imageWidth)
+            widthConstraint.priority = .defaultLow
+            widthConstraint.isActive = true
+            let targetSize = CGSize(width: imageWidth, height: imageWidth)
+            loadImage(from: urlToImage, targetSize: targetSize)
+        } else {
+            imageView.isHidden = true
+        }
     }
 }
 
 extension ArticleLandscapeCell {
-    private func setupStyle() {
-        backgroundColor = .systemPink.withAlphaComponent(0.3)
-        titleLabel.font = .preferredFont(forTextStyle: .title1)
-        titleLabel.numberOfLines = 2
-        publishedAtLabel.font = .preferredFont(forTextStyle: .caption1)
-    }
-    
     private func setupLayout() {
         let labelStackView = UIStackView(arrangedSubviews: [titleLabel, publishedAtLabel])
         labelStackView.axis = .vertical
@@ -62,51 +53,8 @@ extension ArticleLandscapeCell {
 }
 
 extension ArticleLandscapeCell {
-    private func updateImageView(_ urlToImage: String?) {
-        if urlToImage == nil {
-            imageView.isHidden = true
-        } else {
-            imageView.isHidden = false
-            
-            let imageWidth: CGFloat = 120
-            let widthConstraint = imageView.widthAnchor.constraint(equalToConstant: imageWidth)
-            widthConstraint.priority = .defaultLow
-            widthConstraint.isActive = true
-            let targetSize = CGSize(width: imageWidth, height: imageWidth)
-            loadImage(from: urlToImage, targetSize: targetSize)
-        }
-    }
-    
-    private func loadImage(
-        from urlString: String?,
-        targetSize: CGSize
-    ) {
-        guard let urlString,
-              let url = URL(string: urlString)
-        else { return }
-        Task {
-            let loadImage: UIImage?
-            // 파일 매니저에서 데이터 우선 조회
-            if let fileImage = FileManager.default.loadImage(for: urlString, targetSize: targetSize) {
-                loadImage = fileImage
-            } else {
-                let image = await ImageCacheManager.shared.loadImage(from: url, targetSize: targetSize)
-                if let image {
-                    // 파일 매니저에 저장
-                    FileManager.default.saveImage(image, for: urlString)
-                }
-                loadImage = image
-            }
-            await MainActor.run {
-                imageView.image = loadImage
-            }
-        }
-    }
-}
-
-extension ArticleLandscapeCell {
     static func layout() -> NSCollectionLayoutSection {
-        let itemSize = CGSize(width: 300, height: 120)
+        let itemSize = ArticleLandscapeCell.cellSize
         let itemLayoutSize = NSCollectionLayoutSize(widthDimension: .absolute(itemSize.width), heightDimension: .absolute(itemSize.height))
         let item = NSCollectionLayoutItem(layoutSize: itemLayoutSize)
 
