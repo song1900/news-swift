@@ -57,7 +57,7 @@ extension ArticlePortraitCell {
         
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)
-        section.interGroupSpacing = 20
+        section.interGroupSpacing = 100
         return section
     }
 }

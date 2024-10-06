@@ -45,6 +45,7 @@ extension DetailViewController {
         titleLabel.numberOfLines = 2
         titleLabel.textAlignment = .center
         titleLabel.text = viewModel.article.title
+        titleLabel.textColor = .systemBlue
         navigationItem.titleView = titleLabel
     }
 }

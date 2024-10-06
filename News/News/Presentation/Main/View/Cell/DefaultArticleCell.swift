@@ -9,7 +9,7 @@ import UIKit
 
 class DefaultArticleCell: UICollectionViewCell {
     static var reuseIdentifier: String {
-        String(describing: self) 
+        String(describing: self)
     }
     let titleLabel: UILabel = .init()
     let imageView: UIImageView = .init()
@@ -36,12 +36,11 @@ extension DefaultArticleCell {
     func update(_ model: Article) {
         titleLabel.text = model.title
         titleLabel.textColor = model.isRead ? .red : .label
-        publishedAtLabel.text = model.publishedAt
+        publishedAtLabel.text = model.publishedAtInLocalTime ?? model.publishedAt
         updateImageView(model.urlToImage)
     }
     
     private func setupStyle() {
-        backgroundColor = .systemPink.withAlphaComponent(0.3)
         titleLabel.font = .preferredFont(forTextStyle: .title1)
         titleLabel.numberOfLines = 2
         publishedAtLabel.font = .preferredFont(forTextStyle: .caption1)

@@ -18,4 +18,13 @@ struct Article: Decodable, Hashable {
         let formatter = ISO8601DateFormatter()
         return formatter.date(from: publishedAt)
     }
+    
+    var publishedAtInLocalTime: String? {
+        guard let date = publishedDate else { return nil }
+        let localFormatter = DateFormatter()
+        localFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+        localFormatter.locale = Locale.current
+        localFormatter.timeZone = TimeZone.current
+        return localFormatter.string(from: date)
+    }
 }
