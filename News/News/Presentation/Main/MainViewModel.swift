@@ -63,6 +63,12 @@ extension MainViewModel {
 }
 
 extension MainViewModel {
+    
+    private func didSelectArticle(_ article: Article) {
+        guard article.url != nil else { return }
+        actionSubject.send(.showDetail(article))
+    }
+    
     private func updateArticleAsRead(_ article: Article) {
         guard let index = articles.firstIndex(where: { $0.title == article.title }) else { return }
         articles[index].isRead = true

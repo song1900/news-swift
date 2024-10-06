@@ -60,8 +60,8 @@ extension DetailViewModel {
     }
     
     private func loadWebView() {
+        guard let url = article.url else { return }
         handleLoading(true)
-        let url = article.url
         actionSubject.send(.loadWebView(url))
     }
     
