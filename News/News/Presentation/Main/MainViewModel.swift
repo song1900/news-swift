@@ -84,13 +84,14 @@ extension MainViewModel {
         isFetching = true
         Task {
             defer { isFetching = false }
-            guard let apiKey = AppConfiguration.apiKey else {
-                throw NetworkError.missingApiKey
-            }
-            guard let apiBaseUrl = AppConfiguration.apiBaseURL else {
-                throw NetworkError.missingApiBaseURL
-            }
             do {
+                guard let apiKey = AppConfiguration.apiKey else {
+                    throw NetworkError.missingApiKey
+                }
+                guard let apiBaseUrl = AppConfiguration.apiBaseURL else {
+                    throw NetworkError.missingApiBaseURL
+                }
+                
                 let urlString = apiBaseUrl + "/top-headlines?country=us&page=\(currentPage)"
                 var requestBuilder = URLRequestBuilder(url: urlString)
                 requestBuilder.addHeader(field: "X-Api-Key", value: apiKey)
