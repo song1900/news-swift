@@ -76,5 +76,13 @@ extension MainCollectionViewManager: UICollectionViewDelegate {
             viewModel.state = .fetchTopHeadlinesNextPage
         }
     }
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
+        let article = viewModel.articles[indexPath.row]
+        viewModel.state = .didSelectArticle(article)
+    }
 }
 

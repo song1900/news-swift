@@ -26,7 +26,6 @@ final class MainViewController: UIViewController {
     
     override func loadView() {
         view = rootView
-        
     }
     
     override func viewDidLoad() {
@@ -64,7 +63,15 @@ extension MainViewController {
                     } else {
                         self?.hideLoadingView()
                     }
+                case .showDetail(let article):
+                    self?.showDetailViewController(with: article)
                 }
             }.store(in: &cancellables)
+    }
+    
+    private func showDetailViewController(with article: Article) {
+        let detailViewModel = DetailViewModel(article: article)
+        let detailViewController = DetailViewController(viewModel: detailViewModel)
+        navigationController?.pushViewController(detailViewController, animated: true)
     }
 }

@@ -10,10 +10,10 @@ import Combine
 
 extension MainViewModel {
     enum State {
-        case initial, fetchTopHeadlines, fetchTopHeadlinesNextPage
+        case initial, fetchTopHeadlines, fetchTopHeadlinesNextPage, didSelectArticle(Article)
     }
     enum Action {
-        case didFetchTopHeadlines, showLoading(Bool)
+        case didFetchTopHeadlines, showLoading(Bool), showDetail(Article)
     }
 }
 
@@ -52,6 +52,8 @@ extension MainViewModel {
                     self?.fetchTopHeadlines()
                 case .fetchTopHeadlinesNextPage:
                     self?.fetchTopHeadlinesNextPage()
+                case .didSelectArticle(let article):
+                    self?.actionSubject.send(.showDetail(article))
                 }
             }
             .store(in: &cancellables)
