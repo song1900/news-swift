@@ -46,20 +46,11 @@ extension MainCollectionViewManager {
     
     private func setDataSource() -> DataSource {
         let dataSource: DataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, model in
-            if UIDevice.current.orientation.isPortrait {
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArticlePortraitCell.reuseIdentifier, for: indexPath) as? ArticlePortraitCell else {
-                    return .init()
-                }
-                cell.update(model)
-                return cell
-            } else {
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArticleLandscapeCell.reuseIdentifier, for: indexPath) as? ArticleLandscapeCell else {
-                    return .init()
-                }
-                cell.update(model)
-                return cell
-            }
-            
+            let reuseIdentifier = UIDevice.current.orientation.isPortrait ?
+            ArticlePortraitCell.reuseIdentifier : ArticleLandscapeCell.reuseIdentifier
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? DefaultArticleCell else { return .init() }
+            cell.update(model)
+            return cell
         }
         return dataSource
     }

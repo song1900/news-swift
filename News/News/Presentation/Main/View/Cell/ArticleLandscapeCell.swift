@@ -8,7 +8,6 @@
 import UIKit
 
 final class ArticleLandscapeCell: DefaultArticleCell {
-    static let reuseIdentifier = String(describing: ArticleLandscapeCell.self)
     static private let cellSize = CGSize(width: 300, height: 120)
     override init(frame: CGRect) {
         super.init(frame: frame)

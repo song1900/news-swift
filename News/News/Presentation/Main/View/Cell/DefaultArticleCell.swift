@@ -8,6 +8,9 @@
 import UIKit
 
 class DefaultArticleCell: UICollectionViewCell {
+    static var reuseIdentifier: String {
+        String(describing: self) 
+    }
     let titleLabel: UILabel = .init()
     let imageView: UIImageView = .init()
     let publishedAtLabel: UILabel = .init()

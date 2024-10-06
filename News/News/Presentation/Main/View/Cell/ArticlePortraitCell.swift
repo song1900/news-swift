@@ -8,8 +8,6 @@
 import UIKit
 
 final class ArticlePortraitCell: DefaultArticleCell {
-    static let reuseIdentifier = String(describing: ArticlePortraitCell.self)
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayout()
