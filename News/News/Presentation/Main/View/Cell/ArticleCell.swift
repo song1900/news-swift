@@ -9,15 +9,67 @@ import UIKit
 
 final class ArticleCell: UICollectionViewCell {
     static let reuseIdentifier = String(describing: ArticleCell.self)
+    private let titleLabel: UILabel = .init()
+    private let imageView: UIImageView = .init()
+    private let publishedAtLabel: UILabel = .init()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupStyle()
+        setupLayout()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.image = nil
+    }
+    
+    func update(_ model: Article) {
+        titleLabel.text = model.title
+        publishedAtLabel.text = model.publishedAt
+        updateImageView(model.urlToImage)
+    }
+
+}
+
+extension ArticleCell {
+    private func updateImageView(_ urlToImage: String?) {
+        if urlToImage == nil {
+            imageView.isHidden = true
+        } else {
+            imageView.isHidden = false
+            let screenWidth = UIScreen.main.bounds.width
+            let heightConstraint = imageView.heightAnchor.constraint(equalToConstant: screenWidth)
+            heightConstraint.priority = .defaultLow
+            heightConstraint.isActive = true
+            let targetSize = CGSize(width: screenWidth, height: screenWidth)
+        }
+    }
+    
+    private func setupStyle() {
+        backgroundColor = .systemPink.withAlphaComponent(0.3)
+        titleLabel.font = .preferredFont(forTextStyle: .title1)
+        titleLabel.numberOfLines = 2
+        publishedAtLabel.font = .preferredFont(forTextStyle: .caption1)
+    }
+    
+    private func setupLayout() {
+        let spacer = UIView()
+        spacer.heightAnchor.constraint(equalToConstant: 5).isActive = true
+
+        let stackView = UIStackView(arrangedSubviews: [titleLabel, publishedAtLabel, spacer, imageView])
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.distribution = .fillProportionally
+        stackView.alignment = .fill
+        
+        contentView.addSubview(stackView, autoLayout: [.fillX(0), .top(0), .bottom(0)])
+    }
+}
 
 extension ArticleCell {
     static func layout() -> NSCollectionLayoutSection {
@@ -42,11 +94,13 @@ extension ArticleCell {
         let itemSize = CGSize(width: 300, height: 120)
         let itemLayoutSize = NSCollectionLayoutSize(widthDimension: .absolute(itemSize.width), heightDimension: .absolute(itemSize.height))
         let item = NSCollectionLayoutItem(layoutSize: itemLayoutSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
 
-        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(itemSize.width * 5), heightDimension: .absolute(itemSize.height))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(itemSize.width * 5 + 40), heightDimension: .absolute(itemSize.height))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, repeatingSubitem: item, count: 5)
+        group.interItemSpacing = .fixed(10)
+        
         let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 10
         return section
     }
 }

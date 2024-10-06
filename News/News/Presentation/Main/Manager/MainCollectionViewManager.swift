@@ -45,6 +45,7 @@ extension MainCollectionViewManager {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArticleCell.reuseIdentifier, for: indexPath) as? ArticleCell else {
                 return .init()
             }
+            cell.update(model)
             return cell
         }
         return dataSource
