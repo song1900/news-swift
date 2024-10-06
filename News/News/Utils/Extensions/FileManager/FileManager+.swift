@@ -24,10 +24,19 @@ extension FileManager {
         }
     }
     
-    func loadImage(for urlString: String) -> UIImage? {
+    func loadImage(
+        for urlString: String,
+        targetSize: CGSize? = nil
+    ) -> UIImage? {
         do {
             let filePath = try getFilePath(for: urlString)
-            return UIImage(contentsOfFile: filePath.path())
+            var returnImage: UIImage? = UIImage(contentsOfFile: filePath.path())
+            if let targetSize,
+               let image = returnImage
+            {
+                returnImage = image.resized(to: targetSize)
+            }
+            return returnImage
         } catch {
             NSLog((error as? FileManagerError)?.localizedDescription ?? "Failed to load image: \(error.localizedDescription)")
             return nil

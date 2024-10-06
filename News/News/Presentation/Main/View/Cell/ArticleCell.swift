@@ -74,13 +74,26 @@ extension ArticleCell {
     
     private func loadImage(
         from urlString: String?,
-        targetSize: CGSize?
+        targetSize: CGSize
     ) {
-        guard let url = URL(string: urlString ?? "") else { return }
+        guard let urlString,
+              let url = URL(string: urlString)
+        else { return }
         Task {
-            let image = await ImageCacheManager.shared.loadImage(from: url, targetSize: targetSize)
+            let loadImage: UIImage?
+            // 파일 매니저에서 데이터 우선 조회
+            if let fileImage = FileManager.default.loadImage(for: urlString, targetSize: targetSize) {
+                loadImage = fileImage
+            } else {
+                let image = await ImageCacheManager.shared.loadImage(from: url, targetSize: targetSize)
+                if let image {
+                    // 파일 매니저에 저장
+                    FileManager.default.saveImage(image, for: urlString)
+                }
+                loadImage = image
+            }
             await MainActor.run {
-                imageView.image = image
+                imageView.image = loadImage
             }
         }
     }
