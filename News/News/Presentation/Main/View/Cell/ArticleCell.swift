@@ -33,23 +33,9 @@ final class ArticleCell: UICollectionViewCell {
         publishedAtLabel.text = model.publishedAt
         updateImageView(model.urlToImage)
     }
-
 }
 
 extension ArticleCell {
-    private func updateImageView(_ urlToImage: String?) {
-        if urlToImage == nil {
-            imageView.isHidden = true
-        } else {
-            imageView.isHidden = false
-            let screenWidth = UIScreen.main.bounds.width
-            let heightConstraint = imageView.heightAnchor.constraint(equalToConstant: screenWidth)
-            heightConstraint.priority = .defaultLow
-            heightConstraint.isActive = true
-            let targetSize = CGSize(width: screenWidth, height: screenWidth)
-        }
-    }
-    
     private func setupStyle() {
         backgroundColor = .systemPink.withAlphaComponent(0.3)
         titleLabel.font = .preferredFont(forTextStyle: .title1)
@@ -68,6 +54,35 @@ extension ArticleCell {
         stackView.alignment = .fill
         
         contentView.addSubview(stackView, autoLayout: [.fillX(0), .top(0), .bottom(0)])
+    }
+}
+
+extension ArticleCell {
+    private func updateImageView(_ urlToImage: String?) {
+        if urlToImage == nil {
+            imageView.isHidden = true
+        } else {
+            imageView.isHidden = false
+            let screenWidth = UIScreen.main.bounds.width
+            let heightConstraint = imageView.heightAnchor.constraint(equalToConstant: screenWidth)
+            heightConstraint.priority = .defaultLow
+            heightConstraint.isActive = true
+            let targetSize = CGSize(width: screenWidth, height: screenWidth)
+            loadImage(from: urlToImage, targetSize: targetSize)
+        }
+    }
+    
+    private func loadImage(
+        from urlString: String?,
+        targetSize: CGSize?
+    ) {
+        guard let url = URL(string: urlString ?? "") else { return }
+        Task {
+            let image = await ImageCacheManager.shared.loadImage(from: url, targetSize: targetSize)
+            await MainActor.run {
+                imageView.image = image
+            }
+        }
     }
 }
 
