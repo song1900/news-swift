@@ -35,8 +35,14 @@ final class MainViewController: UIViewController {
         bindAction()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = false
         hideLoadingView()
     }
 }
@@ -44,8 +50,6 @@ final class MainViewController: UIViewController {
 extension MainViewController {
     private func setupNavigation() {
         title = "NEWS"
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.hidesSearchBarWhenScrolling = false
     }
 }
 

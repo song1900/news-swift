@@ -28,8 +28,19 @@ final class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigation()
         bindAction()
         viewModel.state = .loadWebView
+    }
+}
+
+extension DetailViewController {
+    private func setupNavigation() {
+        let titleLabel = UILabel()
+        titleLabel.numberOfLines = 2
+        titleLabel.textAlignment = .center
+        titleLabel.text = viewModel.article.title
+        navigationItem.titleView = titleLabel
     }
 }
 
