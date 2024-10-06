@@ -6,13 +6,14 @@
 //
 
 import Combine
+import Foundation
 
 extension DetailViewModel {
     enum State {
         case initial, loadWebView
     }
     enum Action {
-        case loadWebView(String)
+        case loadWebView(String), didMarkArticleAsRead(Article)
     }
 }
 
@@ -38,6 +39,7 @@ extension DetailViewModel {
                 switch state {
                 case .initial: break
                 case .loadWebView:
+                    self?.updateArticleToCoreData()
                     self?.loadWebView()
                 }
             }
@@ -47,5 +49,14 @@ extension DetailViewModel {
     private func loadWebView() {
         let url = article.url
         actionSubject.send(.loadWebView(url))
+    }
+    
+    private func updateArticleToCoreData() {
+        let title = article.title
+        let predicate = NSPredicate(format: "title == %@", title)
+        actionSubject.send(.didMarkArticleAsRead(article))
+        CoreDataManager.shared.update(ArticleEntity.self, predicate: predicate) {
+            $0.isRead = true
+        }
     }
 }

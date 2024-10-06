@@ -12,6 +12,7 @@ struct Article: Decodable, Hashable {
     let url: String
     let urlToImage: String?
     let publishedAt: String
+    var isRead: Bool = false
     
     var publishedDate: Date? {
         let formatter = ISO8601DateFormatter()

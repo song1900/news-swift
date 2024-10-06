@@ -38,6 +38,7 @@ final class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.prefersLargeTitles = true
+        collectionViewManager?.update()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -76,6 +77,13 @@ extension MainViewController {
     private func showDetailViewController(with article: Article) {
         let detailViewModel = DetailViewModel(article: article)
         let detailViewController = DetailViewController(viewModel: detailViewModel)
+        detailViewController.delegate = self
         navigationController?.pushViewController(detailViewController, animated: true)
+    }
+}
+
+extension MainViewController: DetailViewControllerDelegate {
+    func didMarkArticleAsRead(_ article: Article) {
+        viewModel.state = .updateArticleAsRead(article)
     }
 }

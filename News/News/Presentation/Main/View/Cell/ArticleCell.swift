@@ -30,6 +30,7 @@ final class ArticleCell: UICollectionViewCell {
     
     func update(_ model: Article) {
         titleLabel.text = model.title
+        titleLabel.textColor = model.isRead ? .red : .label
         publishedAtLabel.text = model.publishedAt
         updateImageView(model.urlToImage)
     }

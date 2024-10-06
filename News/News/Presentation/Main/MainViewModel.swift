@@ -10,7 +10,7 @@ import Combine
 
 extension MainViewModel {
     enum State {
-        case initial, fetchTopHeadlines, fetchTopHeadlinesNextPage, didSelectArticle(Article)
+        case initial, fetchTopHeadlines, fetchTopHeadlinesNextPage, didSelectArticle(Article), updateArticleAsRead(Article)
     }
     enum Action {
         case didFetchTopHeadlines, showLoading(Bool), showDetail(Article)
@@ -54,6 +54,8 @@ extension MainViewModel {
                     self?.fetchTopHeadlinesNextPage()
                 case .didSelectArticle(let article):
                     self?.actionSubject.send(.showDetail(article))
+                case .updateArticleAsRead(let article):
+                    self?.updateArticleAsRead(article)
                 }
             }
             .store(in: &cancellables)
@@ -61,6 +63,11 @@ extension MainViewModel {
 }
 
 extension MainViewModel {
+    private func updateArticleAsRead(_ article: Article) {
+        guard let index = articles.firstIndex(where: { $0.title == article.title }) else { return }
+        articles[index].isRead = true
+    }
+    
     private func fetchTopHeadlinesNextPage() {
         guard !isFetching && (articles.count < articlesTotalCount) else { return }
         fetchTopHeadlines()
@@ -114,7 +121,8 @@ extension MainViewModel {
             title: $0.title ?? "",
             url: $0.url ?? "",
             urlToImage: $0.urlToImage,
-            publishedAt: $0.publishedAt ?? "")
+            publishedAt: $0.publishedAt ?? "",
+            isRead: $0.isRead)
         }
         actionSubject.send(.didFetchTopHeadlines)
     }
@@ -133,7 +141,8 @@ extension MainViewModel {
                 "title": $0.title,
                 "url": $0.url,
                 "urlToImage": $0.urlToImage as Any,
-                "publishedAt" : $0.publishedAt
+                "publishedAt" : $0.publishedAt,
+                "isRead" : $0.isRead
             ]
         }
         coreDataManager.batchInsert(ArticleEntity.self, data: articleData)

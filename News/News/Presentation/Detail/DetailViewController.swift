@@ -8,7 +8,12 @@
 import UIKit
 import Combine
 
+protocol DetailViewControllerDelegate: AnyObject {
+    func didMarkArticleAsRead(_ article: Article)
+}
+
 final class DetailViewController: UIViewController {
+    weak var delegate: DetailViewControllerDelegate?
     private var rootView = DetailRootView()
     private let viewModel: DetailViewModel
     private var cancellables: Set<AnyCancellable> = .init()
@@ -52,6 +57,8 @@ extension DetailViewController {
                 switch action {
                 case .loadWebView(let url):
                     self?.rootView.loadWebView(url: url)
+                case .didMarkArticleAsRead(let article):
+                    self?.delegate?.didMarkArticleAsRead(article)
                 }
             }.store(in: &cancellables)
     }
