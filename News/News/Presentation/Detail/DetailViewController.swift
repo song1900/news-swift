@@ -39,6 +39,11 @@ final class DetailViewController: UIViewController {
         bindAction()
         viewModel.state = .loadWebView
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        hideLoadingView()
+    }
 }
 
 extension DetailViewController {
