@@ -12,7 +12,6 @@
 		580E98A02CAD9563004D6FE2 /* News.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 580E989E2CAD9563004D6FE2 /* News.xcdatamodeld */; };
 		580E98A22CAD9564004D6FE2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 580E98A12CAD9564004D6FE2 /* Assets.xcassets */; };
 		580E98A52CAD9564004D6FE2 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 580E98A42CAD9564004D6FE2 /* Base */; };
-		580E98AD2CAE60F0004D6FE2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E98AC2CAE60F0004D6FE2 /* MainViewController.swift */; };
 		580E98B02CAE655A004D6FE2 /* UIView+AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E98AF2CAE655A004D6FE2 /* UIView+AutoLayout.swift */; };
 		580E98B72CAE74C8004D6FE2 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E98B62CAE74C8004D6FE2 /* CoreDataManager.swift */; };
 		580E98BA2CAE892D004D6FE2 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E98B92CAE892D004D6FE2 /* Article.swift */; };
@@ -50,7 +49,6 @@
 		580E98A12CAD9564004D6FE2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		580E98A42CAD9564004D6FE2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		580E98A62CAD9564004D6FE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		580E98AC2CAE60F0004D6FE2 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		580E98AF2CAE655A004D6FE2 /* UIView+AutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AutoLayout.swift"; sourceTree = "<group>"; };
 		580E98B62CAE74C8004D6FE2 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		580E98B92CAE892D004D6FE2 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
