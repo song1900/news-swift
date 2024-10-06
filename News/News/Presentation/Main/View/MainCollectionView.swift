@@ -22,6 +22,7 @@ extension MainCollectionView {
     private func setupCollectionView() {
         backgroundColor = .clear
         
-        register(ArticleCell.self, forCellWithReuseIdentifier: ArticleCell.reuseIdentifier)
+        register(ArticlePortraitCell.self, forCellWithReuseIdentifier: ArticlePortraitCell.reuseIdentifier)
+        register(ArticleLandscapeCell.self, forCellWithReuseIdentifier: ArticleLandscapeCell.reuseIdentifier)
     }
 }

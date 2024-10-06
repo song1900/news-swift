@@ -32,6 +32,10 @@ final class MainCollectionViewManager: NSObject {
     func update() {
         applySnapShot()
     }
+    
+    func reloadData() {
+        collectionView.reloadData()
+    }
 }
 
 extension MainCollectionViewManager {
@@ -42,11 +46,20 @@ extension MainCollectionViewManager {
     
     private func setDataSource() -> DataSource {
         let dataSource: DataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, model in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArticleCell.reuseIdentifier, for: indexPath) as? ArticleCell else {
-                return .init()
+            if UIDevice.current.orientation.isPortrait {
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArticlePortraitCell.reuseIdentifier, for: indexPath) as? ArticlePortraitCell else {
+                    return .init()
+                }
+                cell.update(model)
+                return cell
+            } else {
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArticleLandscapeCell.reuseIdentifier, for: indexPath) as? ArticleLandscapeCell else {
+                    return .init()
+                }
+                cell.update(model)
+                return cell
             }
-            cell.update(model)
-            return cell
+            
         }
         return dataSource
     }
@@ -60,7 +73,8 @@ extension MainCollectionViewManager {
     
     private func setCompositinalLayout() -> UICollectionViewCompositionalLayout {
         UICollectionViewCompositionalLayout { _, _ in
-            ArticleCell.layout()
+            UIDevice.current.orientation.isPortrait ?
+            ArticlePortraitCell.layout() : ArticleLandscapeCell.layout()
         }
     }
 }

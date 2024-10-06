@@ -1,14 +1,14 @@
 //
-//  ArticleCell.swift
+//  ArticleLandscapeCell.swift
 //  News
 //
-//  Created by 송우진 on 10/4/24.
+//  Created by 송우진 on 10/6/24.
 //
 
 import UIKit
 
-final class ArticleCell: UICollectionViewCell {
-    static let reuseIdentifier = String(describing: ArticleCell.self)
+final class ArticleLandscapeCell: UICollectionViewCell {
+    static let reuseIdentifier = String(describing: ArticleLandscapeCell.self)
     private let titleLabel: UILabel = .init()
     private let imageView: UIImageView = .init()
     private let publishedAtLabel: UILabel = .init()
@@ -36,7 +36,7 @@ final class ArticleCell: UICollectionViewCell {
     }
 }
 
-extension ArticleCell {
+extension ArticleLandscapeCell {
     private func setupStyle() {
         backgroundColor = .systemPink.withAlphaComponent(0.3)
         titleLabel.font = .preferredFont(forTextStyle: .title1)
@@ -45,30 +45,34 @@ extension ArticleCell {
     }
     
     private func setupLayout() {
-        let spacer = UIView()
-        spacer.heightAnchor.constraint(equalToConstant: 5).isActive = true
-
-        let stackView = UIStackView(arrangedSubviews: [titleLabel, publishedAtLabel, spacer, imageView])
-        stackView.axis = .vertical
-        stackView.spacing = 10
-        stackView.distribution = .fillProportionally
-        stackView.alignment = .fill
+        let labelStackView = UIStackView(arrangedSubviews: [titleLabel, publishedAtLabel])
+        labelStackView.axis = .vertical
+        labelStackView.spacing = 6
+        labelStackView.distribution = .fill
+        labelStackView.alignment = .leading
         
-        contentView.addSubview(stackView, autoLayout: [.fillX(0), .top(0), .bottom(0)])
+        let mainStackView = UIStackView(arrangedSubviews: [imageView, labelStackView])
+        mainStackView.axis = .horizontal
+        mainStackView.spacing = 12
+        mainStackView.distribution = .fillProportionally
+        mainStackView.alignment = .center
+        
+        contentView.addSubview(mainStackView, autoLayout: [.fillX(0), .top(0), .bottom(0)])
     }
 }
 
-extension ArticleCell {
+extension ArticleLandscapeCell {
     private func updateImageView(_ urlToImage: String?) {
         if urlToImage == nil {
             imageView.isHidden = true
         } else {
             imageView.isHidden = false
-            let screenWidth = UIScreen.main.bounds.width
-            let heightConstraint = imageView.heightAnchor.constraint(equalToConstant: screenWidth)
-            heightConstraint.priority = .defaultLow
-            heightConstraint.isActive = true
-            let targetSize = CGSize(width: screenWidth, height: screenWidth)
+            
+            let imageWidth: CGFloat = 120
+            let widthConstraint = imageView.widthAnchor.constraint(equalToConstant: imageWidth)
+            widthConstraint.priority = .defaultLow
+            widthConstraint.isActive = true
+            let targetSize = CGSize(width: imageWidth, height: imageWidth)
             loadImage(from: urlToImage, targetSize: targetSize)
         }
     }
@@ -100,26 +104,8 @@ extension ArticleCell {
     }
 }
 
-extension ArticleCell {
+extension ArticleLandscapeCell {
     static func layout() -> NSCollectionLayoutSection {
-        let isPortrait = UIDevice.current.orientation.isPortrait
-        return isPortrait ? createPortraitSection() : createLandscapeSection()
-    }
-
-    private static func createPortraitSection() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(200))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(200))
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-        
-        let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)
-        section.interGroupSpacing = 20
-        return section
-    }
-
-    private static func createLandscapeSection() -> NSCollectionLayoutSection {
         let itemSize = CGSize(width: 300, height: 120)
         let itemLayoutSize = NSCollectionLayoutSize(widthDimension: .absolute(itemSize.width), heightDimension: .absolute(itemSize.height))
         let item = NSCollectionLayoutItem(layoutSize: itemLayoutSize)
@@ -133,3 +119,4 @@ extension ArticleCell {
         return section
     }
 }
+

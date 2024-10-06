@@ -46,6 +46,14 @@ final class MainViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
         hideLoadingView()
     }
+    
+    override func viewWillTransition(
+        to size: CGSize,
+        with coordinator: UIViewControllerTransitionCoordinator
+    ) {
+        super.viewWillTransition(to: size, with: coordinator)
+        collectionViewManager?.reloadData()
+    }
 }
 
 extension MainViewController {
