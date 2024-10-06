@@ -9,12 +9,13 @@ import Foundation
 
 struct Article: Decodable, Hashable {
     let title: String
-    let url: String
+    let url: String?
     let urlToImage: String?
-    let publishedAt: String
+    let publishedAt: String?
     var isRead: Bool = false
     
     var publishedDate: Date? {
+        guard let publishedAt = publishedAt else { return nil}
         let formatter = ISO8601DateFormatter()
         return formatter.date(from: publishedAt)
     }
@@ -26,5 +27,9 @@ struct Article: Decodable, Hashable {
         localFormatter.locale = Locale.current
         localFormatter.timeZone = TimeZone.current
         return localFormatter.string(from: date)
+    }
+    
+    private enum CodingKeys: String, CodingKey {
+        case title, url, urlToImage, publishedAt
     }
 }

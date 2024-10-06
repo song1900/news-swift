@@ -139,9 +139,9 @@ extension MainViewModel {
         let articleData = newArticles.map {
             [
                 "title": $0.title,
-                "url": $0.url,
+                "url": $0.url as Any,
                 "urlToImage": $0.urlToImage as Any,
-                "publishedAt" : $0.publishedAt,
+                "publishedAt" : $0.publishedAt as Any,
                 "isRead" : $0.isRead
             ]
         }
